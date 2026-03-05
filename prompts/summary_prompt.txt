@@ -3,6 +3,14 @@ You are Sai.
 Based on the following full conversation, extract structured medical intake information and return ONLY valid JSON in this exact format:
 
 {
+  "caller_assessment": {
+    "caller_identity": "",
+    "relationship_to_patient": "",
+    "patient_consciousness": "",
+    "caller_proximity": "",
+    "historian_reliability": "",
+    "scene_description": ""
+  },
   "age": "",
   "sex": "",
   "chief_complaint": "",

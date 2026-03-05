@@ -1,5 +1,5 @@
 import os
-from llm.ollama_client import ask_llm
+from llm.llm_router import ask_llm
 
 
 def run_triage(patient_json_text: str) -> str:

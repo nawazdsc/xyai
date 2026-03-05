@@ -11,3 +11,4 @@ pydub
 streamlit
 reportlab
 python-dotenv
+openai

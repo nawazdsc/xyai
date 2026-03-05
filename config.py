@@ -1,5 +1,11 @@
+import os
+
 OLLAMA_URL = "http://localhost:11434/api/generate"
 MODEL_NAME = "llama3.1:8b"
+
+LLM_PROVIDER = os.environ.get("LLM_PROVIDER", "groq")
+GROQ_API_KEY = os.environ.get("GROQ_API_KEY", "")
+GROQ_MODEL = os.environ.get("GROQ_MODEL", "llama-3.3-70b-versatile")
 
 LANGUAGE = "hi"
 
