@@ -2,7 +2,7 @@ import streamlit as st
 import os
 
 from stt.whisper_stt import transcribe_audio
-from llm.ollama_client import ask_llm
+from llm.llm_router import ask_llm
 from rules.triage_engine import run_triage
 from tts.tts_factory import get_speak
 

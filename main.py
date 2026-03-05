@@ -4,7 +4,7 @@ import scipy.io.wavfile as wav
 import time
 
 from stt.whisper_stt import transcribe_audio
-from llm.ollama_client import ask_llm
+from llm.llm_router import ask_llm
 from memory.patient_store import save_patient_data
 from rules.red_flag_rules import check_red_flags
 from rules.triage_engine import run_triage
@@ -30,7 +30,7 @@ conversation = SYSTEM_PROMPT
 print("🟢 Sai Medical Intake Started")
 
 # 🔊 Initial greeting
-duration = speak("नमस्ते, मैं साई हूँ। आपकी उम्र क्या है?")
+duration = speak("नमस्ते, मैं साई हूँ, एक मेडिकल सहायक। कृपया बताइए, आप कौन हैं और मरीज़ से आपका क्या रिश्ता है?")
 print(f"⏳ Waiting {duration:.2f} seconds before listening...")
 time.sleep(duration + 1)
 
