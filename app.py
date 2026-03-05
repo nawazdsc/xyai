@@ -3,6 +3,8 @@ import os
 
 from stt.whisper_stt import transcribe_audio
 from llm.ollama_client import ask_llm
+from rules.triage_engine import run_triage
+from tts.tts_factory import get_speak
 
 # Load intake prompt
 SYSTEM_PROMPT = open("prompts/intake_prompt.txt", encoding="utf-8").read()
@@ -40,3 +42,25 @@ if uploaded_file is not None:
 
     st.subheader("🤖 Sai's Response")
     st.write(response)
+
+    # ---------------- TTS ----------------
+    tts_output = os.path.join("audio", "output.mp3")
+    from config import TTS_ENGINE
+    if TTS_ENGINE != "disabled":
+        with st.spinner("Generating speech..."):
+            try:
+                speak = get_speak()
+                speak(response)
+
+                if os.path.exists(tts_output):
+                    with open(tts_output, "rb") as audio_file:
+                        st.audio(audio_file.read(), format="audio/mp3")
+            except Exception as e:
+                st.warning(f"TTS playback unavailable: {e}")
+
+    # ---------------- Triage ----------------
+    with st.spinner("Running triage analysis..."):
+        triage_result = run_triage(response)
+
+    st.subheader("🩺 Triage Recommendation")
+    st.info(triage_result)

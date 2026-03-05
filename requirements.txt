@@ -4,3 +4,10 @@ sounddevice
 numpy
 requests
 scipy
+edge-tts
+gTTS
+pygame
+pydub
+streamlit
+reportlab
+python-dotenv

@@ -1,8 +1,12 @@
 import requests
 import os
 from pydub import AudioSegment
+from dotenv import load_dotenv
+from tts.utils import play_audio_file
 
-API_KEY = "sk_5f3f9910e221cc644dc9c8febaba9acd89ddb936e216864c"
+load_dotenv()
+
+API_KEY = os.environ.get("ELEVENLABS_API_KEY", "")
 VOICE_ID = "EXAVITQu4vr4xnSDxMaL"
 
 def speak(text):
@@ -31,11 +35,14 @@ def speak(text):
         with open(output_path, "wb") as f:
             f.write(response.content)
 
-        # 🔊 Calculate duration
+        # 🔊 Calculate duration and play
         audio = AudioSegment.from_file(output_path)
         duration = len(audio) / 1000.0  # seconds
 
-        os.startfile(output_path)
+        try:
+            play_audio_file(output_path)
+        except Exception as play_err:
+            print("⚠️ Audio playback error:", play_err)
 
         return duration
     else:

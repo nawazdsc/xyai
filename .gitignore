@@ -1,0 +1,28 @@
+# Python cache
+__pycache__/
+*.py[cod]
+*$py.class
+*.pyo
+
+# Audio output (generated at runtime)
+audio/
+
+# Patient data and PDFs (sensitive)
+data/patients/
+data/pdfs/
+
+# Environment variables
+.env
+
+# Piper TTS models (large binary files)
+models/
+
+# IDE files
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# OS files
+.DS_Store
+Thumbs.db
