@@ -17,3 +17,9 @@ RED_FLAGS = [
 ]
 
 PIPER_MODEL_PATH = "models/piper/hi_IN-priyamvada-medium.onnx"
+
+# TTS engine selection: "edge" (default), "gtts", "piper", "disabled"
+TTS_ENGINE = "edge"
+
+# Edge TTS voice for Hindi
+EDGE_TTS_VOICE = "hi-IN-SwaraNeural"

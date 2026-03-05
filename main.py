@@ -5,10 +5,13 @@ import time
 
 from stt.whisper_stt import transcribe_audio
 from llm.ollama_client import ask_llm
-from tts.eleven_tts import speak
 from memory.patient_store import save_patient_data
 from rules.red_flag_rules import check_red_flags
+from rules.triage_engine import run_triage
 from memory.pdf.pdf_generator import generate_patient_pdf
+from tts.tts_factory import get_speak
+
+speak = get_speak()
 
 # Load prompts
 SYSTEM_PROMPT = open("prompts/intake_prompt.txt", encoding="utf-8").read()
@@ -62,6 +65,13 @@ while True:
         pdf_path = generate_patient_pdf(final_response)
 
         duration = speak("धन्यवाद। आपकी जानकारी सुरक्षित रूप से दर्ज कर ली गई है।")
+        time.sleep(duration + 1)
+
+        # 🩺 Run triage
+        print("🩺 Running triage analysis...")
+        triage_result = run_triage(final_response)
+        print("🩺 Triage:", triage_result)
+        duration = speak(triage_result)
         time.sleep(duration + 1)
 
         break
